@@ -19,31 +19,36 @@ A full-stack student registration portal with:
 student-portal/
 │
 ├── backend/
+
 │ ├── config/
 │ │ └── db.js
+
 │ ├── controllers/
+
 │ │ └── student.controller.js
-│ ├── routes/
+  │ ├── routes/
+
 │ │ └── student.routes.js
 │ ├── services/
-│ │ ├── avatar.service.js
-│ │ └── imageValidation.service.js
+
+     │ │ ├── avatar.service.js
+     │ │ └── imageValidation.service.js
 │ ├── server.js
 │ ├── package.json
 │ └── package-lock.json
-│
+
 ├── frontend/
 │ ├── index.html
 │ ├── register.html
-│ ├── css/
-│ │ └── style.css
-│ └── js/
-│ ├── list.js
-│ └── register.js
-│
+    ├── css/
+    │ │ └── style.css
+    │ └── js/
+    │ ├── list.js
+    │ └── register.js
+    
 ├── database/
 │ └── schema.sql
-│
+
 ├── .gitignore
 └── README.md
 
