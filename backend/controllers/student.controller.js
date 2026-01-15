@@ -7,8 +7,7 @@ exports.registerStudent = async (req, res) => {
   try {
     const { firstName, middleName, lastName, dob, phone, course } = req.body;
 
-    /* -------- validations (keep as is) -------- */
-
+    // Validations for image
     if (!req.file || !isValidHumanImage(req.file)) {
       return res.status(400).json({ message: "Invalid image file" });
     }
@@ -38,7 +37,8 @@ exports.registerStudent = async (req, res) => {
         // Insert with BLOB
         const sql = `
           INSERT INTO students
-          (first_name, middle_name, last_name, dob, phone, course, avatar)
+          (first_name, midd
+          le_name, last_name, dob, phone, course, avatar)
           VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
 

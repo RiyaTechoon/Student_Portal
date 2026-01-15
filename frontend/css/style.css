@@ -1,6 +1,4 @@
-/* =========================
-   GLOBAL RESET & THEME
-========================= */
+/* GLOBAL RESET & THEME */
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +12,7 @@ body {
   color: #ffffff;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 header {
   width: 100%;
   padding: 20px 40px;
@@ -48,16 +44,12 @@ header a:hover {
   box-shadow: 0 0 15px rgba(124, 77, 255, 0.8);
 }
 
-/* =========================
-   PAGE CONTAINER
-========================= */
+/* PAGE CONTAINER */
 .page-container {
   padding: 40px;
 }
 
-/* =========================
-   STUDENT COUNT (LANDING)
-========================= */
+/* STUDENT COUNT (LANDING) */
 .counter {
   margin: 20px auto 10px;
   padding: 14px 22px;
@@ -79,9 +71,7 @@ header a:hover {
   text-shadow: 0 0 10px #00e5ff;
 }
 
-/* =========================
-   STUDENT CARDS (Landing)
-========================= */
+/* STUDENT CARDS (Landing) */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -125,9 +115,7 @@ header a:hover {
   opacity: 0.9;
 }
 
-/* =========================
-   FORM PAGE
-========================= */
+/* FORM PAGE */
 .form-wrapper {
   max-width: 500px;
   margin: 40px auto;
@@ -191,9 +179,7 @@ form button:hover {
   box-shadow: 0 0 25px rgba(124, 77, 255, 0.8);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 @media (max-width: 600px) {
   header {
     flex-direction: column;

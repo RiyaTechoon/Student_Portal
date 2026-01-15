@@ -1,26 +1,3 @@
-// MUST be OUTSIDE submit handler
-async function isHumanFace(file) {
-  await loadFaceModel();
-
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.src = URL.createObjectURL(file);
-
-    img.onload = async () => {
-      try {
-        const predictions = await faceModel.estimateFaces(img, false);
-        resolve(predictions.length > 0);
-      } catch (err) {
-        reject(err);
-      }
-    };
-
-    
-    img.onerror = () => reject("Image load failed");
-  });
-}
-
-
 document.getElementById("form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -35,7 +12,6 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   if (!firstName || !lastName) {
     alert("First Name and Last Name are required");
     return; 
-    // STOP here
   }
 
   if (!namePattern.test(firstName) || !namePattern.test(lastName)) {
@@ -61,7 +37,7 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     return;
   }
 
-  // IMAGE VALIDATION (STABLE)
+  // IMAGE VALIDATION
   
   const imageFile = document.querySelector('input[name="photo"]').files[0];
 
