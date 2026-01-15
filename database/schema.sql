@@ -10,6 +10,6 @@ CREATE TABLE students (
     dob DATE NOT NULL,
     phone VARCHAR(15) NOT NULL UNIQUE,
     course VARCHAR(50) NOT NULL,
-    avatar_url TEXT NOT NULL,
+    avatar TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

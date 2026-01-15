@@ -9,7 +9,7 @@ fetch("http://localhost:5000/api/students")
     data.forEach(s => {
       container.innerHTML += `
         <div class="card">
-          <img src="${s.avatar_url}" />
+          <img src="${s.avatar}" />
           <div>
             <h3>${s.first_name} ${s.last_name}</h3>
             <p>DOB: ${s.dob}</p>

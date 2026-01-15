@@ -15,6 +15,7 @@ async function isHumanFace(file) {
       }
     };
 
+    
     img.onerror = () => reject("Image load failed");
   });
 }
