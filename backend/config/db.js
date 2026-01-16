@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 
+// create database connection to link with backend
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",

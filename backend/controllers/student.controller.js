@@ -11,6 +11,7 @@ exports.registerStudent = async (req, res) => {
     if (!req.file || !isValidHumanImage(req.file)) {
       return res.status(400).json({ message: "Invalid image file" });
     }
+    
 
     // Generate DiceBear URL
     const seed = firstName + lastName + phone;

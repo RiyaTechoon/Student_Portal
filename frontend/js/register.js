@@ -29,13 +29,27 @@ document.getElementById("form").addEventListener("submit", async (e) => {
   }
 
   // PHONE NUMBER VALIDATION
-  const phonePattern = /^[6-9]\d{9}$/;
   const phone = formData.get("phone").trim();
 
-  if (!phonePattern.test(phone)) {
-    alert("Enter a valid 10-digit phone number");
-    return;
-  }
+// Check only digits
+if (!/^\d+$/.test(phone)) {
+  alert("Phone number must contain digits only");
+  return;
+}
+
+// Check length
+if (phone.length !== 10) {
+  alert("Enter only 10-digit number");
+  return;
+}
+
+// Check starting digit (India)
+const phonePattern = /^[6-9]\d{9}$/;
+if (!phonePattern.test(phone)) {
+  alert("Enter a valid 10-digit phone number");
+  return;
+}
+
 
   // IMAGE VALIDATION
   

@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
+const express = require("express"); //import express framework
+const cors = require("cors"); //import cors middlewares
 
-const studentRoutes = require("./routes/student.routes");
+const studentRoutes = require("./routes/student.routes"); //Imports all student-related APIs
 
 const app = express();
 
