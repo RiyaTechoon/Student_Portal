@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register Student</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="form-wrapper">
+  <h2>Register Student</h2>
+
+  <form id="form" enctype="multipart/form-data">
+    <input name="firstName" placeholder="First Name" required>
+    <input name="middleName" placeholder="Middle Name">
+    <input name="lastName" placeholder="Last Name" required>
+
+    <input name="companyName" placeholder="Company Name" required>
+    <input name="phone" placeholder="Phone (10 digits)" required>
+    <input name="telephone" placeholder="Telephone">
+    <input name="email" placeholder="Email" required>
+
+    <input type="file" name="photo" accept="image/*" required>
+
+    <div class="actions">
+      <button type="submit" class="btn">Submit</button>
+      <button type="button" class="btn cancel" onclick="cancel()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+<script src="../js/register.js"></script>
+</body>
+</html>
+

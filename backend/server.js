@@ -1,7 +1,6 @@
-const express = require("express"); //import express framework
-const cors = require("cors"); //import cors middlewares
-
-const studentRoutes = require("./routes/student.routes"); //Imports all student-related APIs
+const express = require("express");
+const cors = require("cors");
+const studentRoutes = require("./routes/student.routes");
 
 const app = express();
 
@@ -10,6 +9,7 @@ app.use(express.json());
 
 app.use("/api", studentRoutes);
 
-app.listen(5000, () => {
-  console.log("Server running on http://localhost:5000");
+const PORT = 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

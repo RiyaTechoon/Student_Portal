@@ -1,194 +1,248 @@
-/* GLOBAL RESET & THEME */
+/* GLOBAL RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #ffffff;
+  color: #222;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a192f, #020c1b);
-  color: #ffffff;
 }
 
 /* HEADER */
-header {
-  width: 100%;
-  padding: 20px 40px;
-  background: rgba(1, 38, 61, 0.85);
-  backdrop-filter: blur(12px);
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 20px 30px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
 }
 
-header h2 {
-  color: #00e5ff;
-  text-shadow: 0 0 8px #00e5ff;
+.header h2 {
+  font-weight: 600;
+  color: rgb(2, 63, 104);
 }
 
-header a {
-  text-decoration: none;
-  padding: 10px 18px;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #00e5ff, #7c4dff);
-  color: #fff;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-header a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(124, 77, 255, 0.8);
-}
-
-/* PAGE CONTAINER */
-.page-container {
-  padding: 40px;
-}
-
-/* STUDENT COUNT (LANDING) */
-.counter {
-  margin: 20px auto 10px;
-  padding: 14px 22px;
-  width: fit-content;
-  background: rgba(1, 38, 61, 0.85);
-  backdrop-filter: blur(12px);
-  border-radius: 14px;
-  border: 1px solid rgba(97, 224, 247, 0.45);
+/* BUTTONS */
+.btn {
+  background: #1ec8ff;
   color: #ffffff;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
-  text-shadow: 0 0 6px rgba(0, 229, 255, 0.6);
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
-.counter span {
-  color: #00e5ff;
-  margin-left: 6px;
-  text-shadow: 0 0 10px #00e5ff;
+.btn:hover {
+  background: #00b4e6;
+  box-shadow: 0 8px 18px rgba(30, 200, 255, 0.4);
+  transform: translateY(-2px);
 }
 
-/* STUDENT CARDS (Landing) */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 25px;
-  margin-top: 30px;
+.btn.cancel {
+  background: #9aa7b2;
 }
 
-.card {
-  display: flex;
-  gap: 15px;
-  padding: 20px;
-  border-radius: 16px;
-  background: rgba(1, 38, 61, 0.85);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(97, 224, 247, 0.4);
-  box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
-  transition: 0.3s;
+.btn.cancel:hover {
+  background: #7f8c97;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 40px rgba(124, 77, 255, 0.4);
-}
-
-.card img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: #0a192f;
-  border: 2px solid #00e5ff;
-}
-
-.card h3 {
-  margin-bottom: 6px;
-  color: #00e5ff;
-}
-
-.card p {
-  font-size: 14px;
-  margin-bottom: 4px;
-  opacity: 0.9;
-}
-
-/* FORM PAGE */
-.form-wrapper {
-  max-width: 500px;
-  margin: 40px auto;
+/* CONTAINER */
+.container {
   padding: 30px;
-  background: rgba(1, 38, 61, 0.85);
-  backdrop-filter: blur(15px);
-  border-radius: 16px;
-  border: 1px solid rgba(97, 224, 247, 0.5);
-  box-shadow: 0 0 50px rgba(0, 229, 255, 0.2);
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* TABLE (STUDENT LIST) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+thead {
+  background: #f2f9ff;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+th {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #1ec8ff;
+}
+
+tbody tr {
+  transition: background 0.25s ease;
+}
+
+tbody tr:hover {
+  background: #f5fbff;
+}
+
+td a {
+  color: #1ec8ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+.count-box{
+  background-color:  #eaf4fd;
+  border: 2px solid rgb(2, 63, 104);
+  border-radius: 50px;
+  display: inline-block;
+  margin-top: 10px;
+}
+.count {
+  color: rgb(2, 63, 104);
+  font-weight: 600;
+  padding: 8px 16px; 
+}
+
+/* STUDENT CARD (CENTERED) */
+.card-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.student-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: #ffffff;
+  padding: 24px 28px;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 520px;
+  border: 2px solid #ccefff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.student-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid #1ec8ff;
+  object-fit: cover;
+  background: #f7fbff;
+}
+
+.student-card .info h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+  color: #1a1a1a;
+}
+
+.student-card .info p {
+  font-size: 14px;
+  margin-top: 4px;
+  color: #000000;
+}
+
+.contact-line {
+  display: flex;
+  gap: 25px;           /*  spacing between phone & telephone */
+  align-items: center;
+  color: #1ec8ff;
+  font-weight: 500;
+}
+
+.icon {
+  color: #1ec8ff;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+
+
+/* FORM (REGISTER PAGE) */
+.form-wrapper {
+  max-width: 420px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid #bce2f8;
 }
 
 .form-wrapper h2 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #00e5ff;
-  text-shadow: 0 0 8px #00e5ff;
+  margin-bottom: 22px;
+  color: #1ec8ff;
 }
 
-form input,
-form select {
+input {
   width: 100%;
-  margin-bottom: 15px;
-  padding: 12px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 229, 255, 0.4);
-  color: white;
-  outline: none;
-  transition: 0.3s;
-}
-
-form input:focus,
-form select:focus {
-  border-color: #00e5ff;
-  box-shadow: 0 0 10px #00e5ff;
-}
-
-form select option {
-  background: #0a192f;
-}
-
-form button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 10px;
-  background: linear-gradient(90deg, #00e5ff, #7c4dff);
-  border: none;
+  padding: 12px 14px;
+  margin-bottom: 14px;
   border-radius: 10px;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  letter-spacing: 1px;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.4),
-              0 0 50px rgba(124, 77, 255, 0.2);
-  transition: 0.3s;
+  border: 1px solid #cfe9f7;
+  background: #ffffff;
+  color: #222;
+  transition: all 0.3s ease;
 }
 
-form button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(124, 77, 255, 0.8);
+/* Hover + Focus effect */
+input:hover,
+input:focus {
+  border-color: #1ec8ff;
+  box-shadow: 0 0 0 4px rgba(30, 200, 255, 0.15);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
 
 /* RESPONSIVE */
-@media (max-width: 600px) {
-  header {
+@media (max-width: 768px) {
+  .header {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .card {
+  .student-card {
     flex-direction: column;
-    align-items: center;
     text-align: center;
   }
+
+  .student-card img {
+    margin-bottom: 10px;
+  }
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  .form-wrapper {
+    margin: 30px 15px;
+  }
+}
+

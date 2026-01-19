@@ -1,3 +1,3 @@
 exports.generateAvatar = (seed) => {
-  return `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(seed)}`;
+  return `https://api.dicebear.com/7.x/personas/svg?seed=${encodeURIComponent(seed)}`;
 };

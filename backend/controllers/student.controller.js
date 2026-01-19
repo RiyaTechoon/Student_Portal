@@ -1,46 +1,67 @@
-const axios = require("axios");
 const db = require("../config/db");
+const axios = require("axios");
 const { generateAvatar } = require("../services/avatar.service");
-const { isValidHumanImage } = require("../services/imageValidation.service");
 
+/* REGISTER STUDENT */
 exports.registerStudent = async (req, res) => {
   try {
-    const { firstName, middleName, lastName, dob, phone, course } = req.body;
+    const {
+      firstName,
+      middleName,
+      lastName,
+      companyName,
+      phone,
+      telephone,
+      email
+    } = req.body;
 
-    // Validations for image
-    if (!req.file || !isValidHumanImage(req.file)) {
-      return res.status(400).json({ message: "Invalid image file" });
+    /* VALIDATIONS */
+    const nameRegex = /^[A-Za-z]+$/;
+    const phoneRegex = /^\d{10}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$/;
+
+    if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+      return res.status(400).json({ message: "Name must contain only alphabets" });
     }
-    
 
-    // Generate DiceBear URL
-    const seed = firstName + lastName + phone;
-    const avatarUrl = generateAvatar(seed);
+    if (!phoneRegex.test(phone)) {
+      return res.status(400).json({ message: "Phone number must be 10 digits" });
+    }
 
-    // FETCH avatar image as binary
-    const avatarResponse = await axios.get(avatarUrl, {
-      responseType: "arraybuffer"
-    });
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
 
-    const avatarBuffer = Buffer.from(avatarResponse.data);
+    if (!req.file) {
+      return res.status(400).json({ message: "Image upload is required" });
+    }
 
-    // Check duplicate phone
+    /*  EMAIL UNIQUENESS */
     db.query(
-      "SELECT id FROM students WHERE phone = ?",
-      [phone],
-      (err, result) => {
-        if (err) return res.status(500).json({ error: err });
+      "SELECT id FROM students WHERE email = ?",
+      [email],
+      async (err, rows) => {
+        if (err) return res.status(500).json(err);
 
-        if (result.length > 0) {
-          return res.status(400).json({ message: "Phone number already registered" });
+        if (rows.length > 0) {
+          return res.status(400).json({ message: "Email already exists" });
         }
 
-        // Insert with BLOB
+        /*  AVATAR GENERATION  */
+        const seed = firstName + lastName + email;
+        const avatarUrl = generateAvatar(seed);
+
+        const avatarResponse = await axios.get(avatarUrl, {
+          responseType: "arraybuffer"
+        });
+
+        const avatarBuffer = Buffer.from(avatarResponse.data);
+
+        /* INSERT INTO DB  */
         const sql = `
           INSERT INTO students
-          (first_name, midd
-          le_name, last_name, dob, phone, course, avatar)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
+          (first_name, middle_name, last_name, company_name, phone, telephone, email, avatar)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
         db.query(
@@ -49,13 +70,14 @@ exports.registerStudent = async (req, res) => {
             firstName,
             middleName,
             lastName,
-            dob,
+            companyName,
             phone,
-            course,
+            telephone,
+            email,
             avatarBuffer
           ],
           (err) => {
-            if (err) return res.status(500).json({ error: err });
+            if (err) return res.status(500).json(err);
             res.json({ message: "Student Registered Successfully" });
           }
         );
@@ -63,18 +85,39 @@ exports.registerStudent = async (req, res) => {
     );
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Avatar processing failed" });
+    res.status(500).json({ message: "Registration failed" });
   }
 };
+
+/* GET ALL STUDENTS (TABLE PAGE) */
 exports.getStudents = (req, res) => {
-  db.query("SELECT * FROM students ORDER BY created_at DESC", (err, results) => {
-    if (err) return res.status(500).json(err);
+  db.query(
+    "SELECT id, first_name, last_name, company_name, phone, email FROM students ORDER BY created_at DESC",
+    (err, rows) => {
+      if (err) return res.status(500).json(err);
+      res.json(rows);
+    }
+  );
+};
 
-    const students = results.map(s => ({
-      ...s,
-      avatar: `data:image/svg+xml;base64,${s.avatar.toString("base64")}`
-    }));
+/* GET SINGLE STUDENT (CARD PAGE) */
+exports.getStudentById = (req, res) => {
+  const id = req.params.id;
 
-    res.json(students);
-  });
+  db.query(
+    "SELECT * FROM students WHERE id = ?",
+    [id],
+    (err, rows) => {
+      if (err) return res.status(500).json(err);
+      if (rows.length === 0) {
+        return res.status(404).json({ message: "Student not found" });
+      }
+
+      const student = rows[0];
+
+      student.avatar = `data:image/svg+xml;base64,${Buffer.from(student.avatar).toString("base64")}`;
+
+      res.json(student);
+    }
+  );
 };
