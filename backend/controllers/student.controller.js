@@ -27,6 +27,15 @@ exports.registerStudent = async (req, res) => {
     if (!phoneRegex.test(phone)) {
       return res.status(400).json({ message: "Phone number must be 10 digits" });
     }
+    if (telephone) {
+    const telPattern = /^\d{3}-\d{3}-\d{3}$/;
+
+    if (!telPattern.test(telephone)) {
+      return res.status(400).json({
+        message: "Telephone must be in format: 123-456-789"
+      });
+      }
+    }
 
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: "Invalid email format" });
@@ -92,7 +101,7 @@ exports.registerStudent = async (req, res) => {
 /* GET ALL STUDENTS (TABLE PAGE) */
 exports.getStudents = (req, res) => {
   db.query(
-    "SELECT id, first_name, last_name, company_name, phone, email FROM students ORDER BY created_at DESC",
+    "SELECT id, first_name, last_name, company_name, phone, telephone, email FROM students ORDER BY created_at DESC",
     (err, rows) => {
       if (err) return res.status(500).json(err);
       res.json(rows);

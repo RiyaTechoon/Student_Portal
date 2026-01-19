@@ -13,6 +13,7 @@ fetch("http://localhost:5000/api/students")
         <td>${s.first_name} ${s.last_name}</td>
         <td>${s.company_name}</td>
         <td>${s.phone}</td>
+        <td>${s.telephone || "-"}</td>
         <td>${s.email}</td>
         <td>
           <a href="student.html?id=${s.id}">View</a>
